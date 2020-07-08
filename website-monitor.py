@@ -8,13 +8,15 @@ import hashlib
 import urllib.request
 import random
 import time
-from playsound import playsound
+import pygame
+import sys
 
-# url to be scraped
-url = "https://jagr.github.io"
-
-# time between checks in seconds
-sleeptime = 60
+if len(sys.argv) != 2:
+    url = "https://jagr.github.io"
+else:
+    url = sys.argv[1]
+ 
+print(f'Monitoring {url}')
 
 def getHash():
     # random integer to select user agent
@@ -42,12 +44,25 @@ def getHash():
 
     return hashlib.sha224(the_page).hexdigest()
 
+# url to be scraped
+# url = "https://jagr.github.io"
+
+# time between checks in seconds
+sleeptime = 60
+
+pygame.mixer.init()
+pygame.mixer.music.load("yee.mp3")
+
+
 current_hash = getHash() # Get the current hash, which is what the website is now
 
 while 1: # Run forever
     if getHash() == current_hash: # If nothing has changed
         print("Not Changed")
+
     else: # If something has changed
         print("Changed")
-        playsound('yee.mp3')
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy() == True:
+            continue
     time.sleep(sleeptime)
