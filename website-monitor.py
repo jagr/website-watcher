@@ -10,6 +10,8 @@ import random
 import time
 from playsound import playsound
 
+# TODO: Add selenium to automaticaly open the watched site upon change
+
 # url to be scraped
 url = "https://jagr.github.io"
 
