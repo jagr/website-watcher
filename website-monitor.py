@@ -72,4 +72,5 @@ while 1: # Run forever
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy() == True:
             continue
+        current_hash = getHash()
     time.sleep(sleeptime)
